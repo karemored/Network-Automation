@@ -5,39 +5,50 @@ import connectivity as png
 SUCCESS = 1
 FAIL = 0
 
-#...INSIDE PRIVILEDGE EXECUTIVE WRAPPER...
-#...THIS FUNCTION WILL BE THE CONTROL CENTER...
-#...EVERY CONFIGURATION SHOULD RETURN CONTROL TO THIS FUNCTION...
+###################################################################
+# NAME         : privExecModeWr
+# DESCRIPTION  : Wrapper for Priviledge Exec Mode
+#		 Functions with appropriate confis are called 
+#		 from this function
+#		 Every config function after execution must 
+#		 return control to this wrapper function
+# INPUT PARAMS : 1. session_list : list of telnet sessions
+#                2. logs : pointer to the log file
+# RETURN       : SUCCESS/FAIL
+###################################################################
 
 def privExecModeWr(logs,session_list):
         buffertrack = ""
         cmd_to_exec = ""
         list_show = []
 
-        if shwc.showConfigs(logs,session_list[1]) is FAIL:
+	# show ineterface command called for a session_id
+        if shwc.showIpIntConfigs(logs,session_list[1]) is FAIL:  
                 return FAIL
 
-        if shwc.showConfigs(logs,session_list[2]) is FAIL:
+        if shwc.showIpIntConfigs(logs,session_list[2]) is FAIL:
                 return FAIL
 
-        if shwc.showConfigs(logs,session_list[3]) is FAIL:
+        if shwc.showIpIntConfigs(logs,session_list[3]) is FAIL: 
                 return FAIL
 
-        intconf.intfConfigs(logs,session_list[1],1,0,"20.0.0.1","255.255.255.0")
+	# interface configuration (telnet_sesion_id, slot, port, ip_address, subnet_mask
+        intconf.intfConfigs(logs,session_list[1],1,0,"20.0.0.1","255.255.255.0")   
         intconf.intfConfigs(logs,session_list[1],2,0,"30.0.0.1","255.255.255.0")
         intconf.intfConfigs(logs,session_list[2],1,0,"20.0.0.2","255.255.255.0")
         intconf.intfConfigs(logs,session_list[2],2,0,"30.0.0.1","255.255.255.0")
         intconf.intfConfigs(logs,session_list[3],2,0,"30.0.0.2","255.255.255.0")
 
-        if shwc.showConfigs(logs,session_list[1]) is FAIL:
+        if shwc.showIpIntConfigs(logs,session_list[1]) is FAIL:
                 return FAIL
 
-        if shwc.showConfigs(logs,session_list[2]) is FAIL:
+        if shwc.showIpIntConfigs(logs,session_list[2]) is FAIL:
                 return FAIL
 
-        if shwc.showConfigs(logs,session_list[3]) is FAIL:
+        if shwc.showIpIntConfigs(logs,session_list[3]) is FAIL:
                 return FAIL
         
+	# check ping to an IP_ADDRESS on a telnet session 
 	png.chkPing(logs,session_list[1],"20.0.0.2")
 
 
