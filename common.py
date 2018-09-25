@@ -1,6 +1,8 @@
 import sys
 import re
 
+import glbvar as glb
+
 SUCCESS = 1
 FAIL = 0
 
@@ -11,6 +13,7 @@ def execComnd(cmd,logs,process):
 	return printOP(logs,process)
 
 def printOP(logs,process):
+	global PING_STAT
         buffertrack = ""
 
         while True:
@@ -36,9 +39,8 @@ def printOP(logs,process):
 			if re.search('Success\srate\sis\s\d+\spercent\s\(\w',buffertrack):
 				buffertrack = ""
 				if opparser == '0':
-					return FAIL
+					glb.PING_STAT = 0
 				else:
-					return SUCCESS
-				break
+					glb.PING_STAT = 1
 
         return SUCCESS

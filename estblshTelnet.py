@@ -98,6 +98,8 @@ def fetchIP():
         list_ip.append("192.168.80.10") 
         list_ip.append("192.168.80.20")
         list_ip.append("192.168.80.30")
+	list_ip.append("192.168.80.40")
+	list_ip.append("192.168.80.50")
 
         return list_ip                                                   # return list of IPs to the main function 
  
