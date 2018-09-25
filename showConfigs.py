@@ -11,11 +11,11 @@ SUCCESS = 1
 # RETURN       : SUCCESS/FAIL
 ###################################################################
 
-def genCommand(logs,params_list):
+def genCommand(logs,param_list):
         cmd = ""
         list_show = ["show "]
 
-	for itr in range (1,len(param_list)):
+	for itr in range (0,len(param_list)):
 		list_show.append(param_list[itr])
 
         cmd = ''.join(list_show)
@@ -34,7 +34,7 @@ def genCommand(logs,params_list):
 def showIpIntConfigs(logs,process):
 	param_list = "ip interface brief"
         cmd = genCommand(logs,param_list)
-
+		
         if cmn.execComnd(cmd,logs,process) is FAIL:
                 return FAIL
 

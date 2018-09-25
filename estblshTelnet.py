@@ -124,8 +124,10 @@ def main():
                         print "ERROR : PROCESS ESTABLISH FAIL"
 
                 sessionID = sessionID + 1
-        if mode.jumpToMode(logs,session_list) is FAIL :                  # jump to User Executive mode 
-		print "ERROR : Failed to enter UserExec/ PrivExec Mode
+        #if mode.jumpToMode(logs,session_list) is FAIL :                  # jump to User Executive mode 
+		#print "ERROR : Failed to enter UserExec/PrivExec Mode
+	
+	mode.jumpToMode(logs,session_list)
 if __name__ ==  "__main__" :
         main()
 
