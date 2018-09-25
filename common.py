@@ -7,7 +7,8 @@ FAIL = 0
 def execComnd(cmd,logs,process):
         process.stdin.write(cmd)
         process.stdin.write("\n")
-        printOP(logs,process)
+        
+	return printOP(logs,process)
 
 def printOP(logs,process):
         buffertrack = ""
@@ -22,13 +23,22 @@ def printOP(logs,process):
                         sys.stdout.flush()
                         if re.search('R\w#',buffertrack):
                                 buffertrack = ""
+				opparser = None
                                 break
                         if re.search('R\w\(config\)#',buffertrack):
                                 buffertrack = ""
+				opparser = None
                                 break
                         if re.search('R\w\(config-if\)#',buffertrack):
                                 buffertrack = ""
+				opparser = None
                                 break
+			if re.search('Success\srate\sis\s\d+\spercent\s\(\w',buffertrack):
+				buffertrack = ""
+				if opparser == '0':
+					return FAIL
+				else:
+					return SUCCESS
+				break
 
-        return
-
+        return SUCCESS

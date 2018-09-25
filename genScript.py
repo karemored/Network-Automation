@@ -49,8 +49,9 @@ def privExecModeWr(logs,session_list):
                 return FAIL
         
 	# check ping to an IP_ADDRESS on a telnet session 
-	png.chkPing(logs,session_list[1],"20.0.0.2")
-
+	if png.chkPing(logs,session_list[1],"20.0.0.2") is FAIL:
+		print "\nERROR : PING RETURNED FAILURE"
+		
 
         return SUCCESS
 
