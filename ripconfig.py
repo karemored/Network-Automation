@@ -1,3 +1,10 @@
+import time
+
+import glbvar as glb
+import common as cmn
+
+SUCCESS = 1
+FAIL = 0
 ###################################################################
 # NAME         : globalConfMode
 # DESCRIPTION  : Enters the global conf mode
@@ -7,14 +14,59 @@
 ###################################################################
 
 def globalConfMode(logs,process):
+	glb.initGlbExec()
         if cmn.execComnd("configure terminal",logs,process) is FAIL:
                 return FAIL
 
+	if glb.valGlbExec() is FAIL:
+		print "ERROR : FAILED TO ENTER GLOBAL EXEC MODE"
+		return FAIL	
         return SUCCESS
 
-def confRIP
+def confRIP(logs,process,ip):
+	network = "network "
+	glb.initRouterConf()
+	if cmn.execComnd("router rip",logs,process) is FAIL:
+                return FAIL
 
+	if glb.valRouterConf() is FAIL:
+		print "ERROR : FAILED TO ENTER ROUTER CONF MODE"
+		return FAIL
+	
+	if cmn.execComnd("version 2",logs,process) is FAIL:
+                return FAIL
 
-def enableRIP(logs,session_id,ip):
-	if globalConfMode(logs,session_id) is FAIL:
+	network = network + ip 
+	if cmn.execComnd(network,logs,process) is FAIL:
+                return FAIL
+
+	if cmn.execComnd("no auto-summary",logs,process) is FAIL:
+                return FAIL
+
+	return SUCCESS
+
+def extGlobalMode(logs,process):
+        if cmn.execComnd("exit",logs,process) is FAIL:
+                return FAIL
+
+        if cmn.execComnd("exit",logs,process) is FAIL:
+                return FAIL
+	
+        return SUCCESS
+	
+def enableRIP(logs,process,ip):
+        if glb.valPrivExec() is FAIL:
+                print "ERROR : CONTROL NOT AT PRIVEXEC MODE"
+                print "ERROR : FUNCTION : \"enableRIP\" returning failure"
+                return FAIL
+
+	if globalConfMode(logs,process) is FAIL:
                 print "ERROR : FUNCTION \'globalConfMode\' returned Failure"
+	
+	if confRIP(logs,process,ip) is FAIL:	
+		print "ERROR : FUNCTION \'confRIP\' returned Failure"
+
+	if extGlobalMode(logs,process) is FAIL:
+                print "ERROR : FUNCTION \'extGlobalMode\' returned Failure"
+
+

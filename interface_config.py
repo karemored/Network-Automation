@@ -86,7 +86,7 @@ def extGlobalMode(logs,process):
 
         if cmn.execComnd("exit",logs,process) is FAIL:
                 return FAIL
-
+	
         return SUCCESS
 
 ###################################################################

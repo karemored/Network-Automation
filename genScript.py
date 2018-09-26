@@ -1,6 +1,9 @@
+import time 
+
 import showConfigs as shwc
 import interface_config as intconf
 import connectivity as png
+import ripconfig as rip
 
 SUCCESS = 1
 FAIL = 0
@@ -60,7 +63,7 @@ def privExecModeWr(logs,session_list):
                 return FAIL
  
 	# check ping to an IP_ADDRESS on a telnet session 
-	if png.chkPing(logs,session_list[1],"20.0.0.6") is FAIL:
+	if png.chkPing(logs,session_list[1],"20.0.0.2") is FAIL:
 		print "\nERROR : PING RETURNED FAILURE"
 	
 	if png.chkPing(logs,session_list[1],"40.0.0.2") is FAIL:
@@ -69,15 +72,45 @@ def privExecModeWr(logs,session_list):
 	if png.chkPing(logs,session_list[2],"30.0.0.2") is FAIL:
                 print "\nERROR : PING RETURNED FAILURE"
 	
-	if png.chkPing(logs,session_list[3],"60.0.0.6") is FAIL:
+	if png.chkPing(logs,session_list[3],"60.0.0.2") is FAIL:
                 print "\nERROR : PING RETURNED FAILURE"
 		
 	if png.chkPing(logs,session_list[4],"50.0.0.2") is FAIL:
                 print "\nERROR : PING RETURNED FAILURE"
 
 	# enable RIPv2 on ROUTER with its sessio id"
-	#rip.enableRIP(logs,session_list[1],"20.0.0.0")
+	rip.enableRIP(logs,session_list[1],"20.0.0.0")
+	rip.enableRIP(logs,session_list[1],"40.0.0.0")
+	rip.enableRIP(logs,session_list[2],"20.0.0.0")
+	rip.enableRIP(logs,session_list[2],"30.0.0.0")
+	rip.enableRIP(logs,session_list[3],"30.0.0.0")
+	rip.enableRIP(logs,session_list[3],"60.0.0.0")
+	rip.enableRIP(logs,session_list[4],"40.0.0.0")
+	rip.enableRIP(logs,session_list[4],"50.0.0.0")
+	rip.enableRIP(logs,session_list[5],"50.0.0.0")
+	rip.enableRIP(logs,session_list[5],"60.0.0.0")
+
+
+        if png.chkPing(logs,session_list[1],"60.0.0.2") is FAIL:
+                print "\nERROR : PING RETURNED FAILURE"
+
+        if png.chkPing(logs,session_list[2],"50.0.0.2") is FAIL:
+                print "\nERROR : PING RETURNED FAILURE"
+
+        if png.chkPing(logs,session_list[3],"20.0.0.2") is FAIL:
+                print "\nERROR : PING RETURNED FAILURE"
+
+        if png.chkPing(logs,session_list[4],"30.0.0.2") is FAIL:
+                print "\nERROR : PING RETURNED FAILURE"
+
+        if png.chkPing(logs,session_list[5],"40.0.0.2") is FAIL:
+                print "\nERROR : PING RETURNED FAILURE"
+
+	print "RIP CONFIG SUCCESSFUL"
+	print "SLEEPING FOR 10secs FOR ROUTES TO CONVERGE"
+	time.sleep(10)		
 
         return SUCCESS
+
 
 
