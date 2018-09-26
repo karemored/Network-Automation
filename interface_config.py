@@ -1,4 +1,5 @@
 import  common as cmn
+import glbvar as glb
 
 FAIL = 0
 SUCCESS = 1
@@ -12,10 +13,15 @@ SUCCESS = 1
 ###################################################################
 
 def globalConfMode(logs,process):
+	glb.initGlbExec()
         if cmn.execComnd("configure terminal",logs,process) is FAIL:
                 return FAIL
 
-        return SUCCESS
+	if glb.valGlbExec() is FAIL:
+		print "ERROR : FAILED TO ENETER GLOBAL EXEC MODE"
+		return FAIL
+        
+	return SUCCESS
 
 ###################################################################
 # NAME         : intConfMode
@@ -28,6 +34,7 @@ def globalConfMode(logs,process):
 ###################################################################
 
 def intConfMode(logs,process,slot,port):
+	glb.initInfConf()
         cmd = ""
         list_cmd = ['interface fastethernet ']
         list_cmd.append(str(slot))
@@ -37,6 +44,10 @@ def intConfMode(logs,process,slot,port):
 
         if cmn.execComnd(cmd,logs,process) is FAIL:
                 return FAIL
+
+	if glb.valInfConf is FAIL:
+		"ERROR : FAILED TO ENTER INTERFACE CONF MODE"
+		return FAIL
 
         return SUCCESS
 
@@ -90,6 +101,11 @@ def extGlobalMode(logs,process):
 ###################################################################
 
 def intfConfigs(logs,process,slot,port,ip,mask):
+	if glb.valPrivExec() is FAIL:
+		print "ERROR : CONTROL NOT AT PRIVEXEC MODE"
+		print "ERROR : FUNCTION : \"intfConfigs\" returning failure"
+		return FAIL
+
         if globalConfMode(logs,process) is FAIL:
                 print "ERROR : FUNCTION \'globalConfMode\' returned Failure"
 

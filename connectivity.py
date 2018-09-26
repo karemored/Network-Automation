@@ -10,6 +10,11 @@ FAIL = 0
 global PING_STAT
 
 def chkPing(logs,process,ip):
+	if glb.valPrivExec() is FAIL:
+                print "ERROR : CONTROL NOT AT PRIVEXEC MODE"
+                print "ERROR : FUNCTION : \"chkPing\" returning failure"
+                return FAIL
+
 	glb.initPingStat()
 	cmd = "ping "+ip
 	

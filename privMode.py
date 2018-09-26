@@ -1,4 +1,5 @@
 import genScript as script
+import glbvar as glb
 import re
 import sys
 
@@ -50,6 +51,7 @@ def usrExecMode(logs,session_list):
 #####################################################################
 
 def privExecMode(logs,session_list):
+	glb.initPrivExec()
         buffertrack = ""
 
         for itr in range(1,len(session_list)):
@@ -66,7 +68,11 @@ def privExecMode(logs,session_list):
 
                                 if re.search('R\w#',buffertrack):
                                         buffertrack = ""
+					glb.PRIV_EXECM = 1
                                         break
+	if glb.valPrivExec() is FAIL:
+		print "ERROR : FAILED TO ENETER PRIV EXEC MODE"
+		return FAIL
         return SUCCESS
 
 ###################################################################
@@ -85,11 +91,11 @@ def jumpToMode(logs,session_list):
                 return FAIL
 
         if privExecMode(logs,session_list) is FAIL:
-                print "ERROR : FUNCTION \"userExecMode\" RETURNED FAILURE"
+                print "ERROR : FUNCTION \"privExecMode\" RETURNED FAILURE"
                 return FAIL
 
         if script.privExecModeWr(logs,session_list) is FAIL:
-                print "ERROR : FUNCTION \"userExecMode\" RETURNED FAILURE"
+                print "ERROR : FUNCTION \"privExecModeWr\" RETURNED FAILURE"
                 return FAIL
 
 

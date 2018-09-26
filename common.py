@@ -14,7 +14,12 @@ def execComnd(cmd,logs,process):
 
 def printOP(logs,process):
 	global PING_STAT
-        buffertrack = ""
+	global PRIV_EXECM
+	global GLOBAL_EXECM
+	global INTF_CONFM
+	global ROUTER_CONFM
+        
+	buffertrack = ""
 
         while True:
                 opparser = process.stdout.read(1)
@@ -27,14 +32,22 @@ def printOP(logs,process):
                         if re.search('R\w#',buffertrack):
                                 buffertrack = ""
 				opparser = None
+				glb.PRIV_EXECM = 1
                                 break
                         if re.search('R\w\(config\)#',buffertrack):
                                 buffertrack = ""
 				opparser = None
+				glb.GLOBAL_EXECM = 1
                                 break
                         if re.search('R\w\(config-if\)#',buffertrack):
                                 buffertrack = ""
 				opparser = None
+				glb.INTF_CONFM = 1
+                                break
+			if re.search('R\w\(config-router\)#',buffertrack):
+                                buffertrack = ""
+                                opparser = None
+				glb.ROUTER_CONFM = 1
                                 break
 			if re.search('Success\srate\sis\s\d+\spercent\s\(\w',buffertrack):
 				buffertrack = ""

@@ -1,4 +1,5 @@
 import common as cmn
+import glbvar as glb
 
 FAIL = 0
 SUCCESS = 1
@@ -32,6 +33,11 @@ def genCommand(logs,param_list):
 ###################################################################
 
 def showIpIntConfigs(logs,process):
+        if glb.valPrivExec() is FAIL:
+                print "ERROR : CONTROL NOT AT PRIVEXEC MODE"
+                print "ERROR : FUNCTION : \"showIpIntConfigs\" returning failure"
+                return FAIL
+	
 	param_list = "ip interface brief"
         cmd = genCommand(logs,param_list)
 		

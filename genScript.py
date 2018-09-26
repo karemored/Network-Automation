@@ -1,7 +1,6 @@
 import showConfigs as shwc
 import interface_config as intconf
 import connectivity as png
-import ripconfig as rip
 
 SUCCESS = 1
 FAIL = 0
@@ -77,7 +76,7 @@ def privExecModeWr(logs,session_list):
                 print "\nERROR : PING RETURNED FAILURE"
 
 	# enable RIPv2 on ROUTER with its sessio id"
-	rip.enableRIP(logs,session_list[1],"20.0.0.0")
+	#rip.enableRIP(logs,session_list[1],"20.0.0.0")
 
         return SUCCESS
 
