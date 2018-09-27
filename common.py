@@ -57,3 +57,23 @@ def printOP(logs,process):
 					glb.PING_STAT = 1
 
         return SUCCESS
+
+
+def valIntStatusWr(logs,process,slot,port):
+	buffertrack = ""
+	
+	to_search = "FastEthernet"+str(slot)+"/"+str(port)+"\s+(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})\s+YES\s+\w+\s+(\w+)\s+(\w+)\s+"
+	process.stdin.write("show ip interface brief")
+	process.stdin.write("\n")
+	
+	while True:
+		opparser = process.stdout.read(1)
+		buffertrack = buffertrack + str(opparser)
+		
+		if re.search(to_search,buffertrack):
+			
+			break
+	
+	search_1 = re.findall(to_search,buffertrack)
+	
+	return search_1[0]

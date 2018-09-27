@@ -47,6 +47,17 @@ def privExecModeWr(logs,session_list):
 	intconf.intfConfigs(logs,session_list[5],2,0,"50.0.0.2","255.255.255.0")
 	intconf.intfConfigs(logs,session_list[5],1,0,"60.0.0.2","255.255.255.0")
 
+	#intconf.valIntStatus(logs,session_list[1],1,0)
+	#intconf.valIntStatus(logs,session_list[1],2,0)
+	#intconf.valIntStatus(logs,session_list[2],1,0)
+	#intconf.valIntStatus(logs,session_list[2],2,0)
+	#intconf.valIntStatus(logs,session_list[3],2,0)
+	#intconf.valIntStatus(logs,session_list[3],3,0)
+	#intconf.valIntStatus(logs,session_list[4],1,0)
+	#intconf.valIntStatus(logs,session_list[4],2,0)
+	#intconf.valIntStatus(logs,session_list[5],2,0)
+	#intconf.valIntStatus(logs,session_list[5],1,0)
+
         if shwc.showIpIntConfigs(logs,session_list[1]) is FAIL:
                 return FAIL
 
@@ -90,6 +101,10 @@ def privExecModeWr(logs,session_list):
 	rip.enableRIP(logs,session_list[5],"50.0.0.0")
 	rip.enableRIP(logs,session_list[5],"60.0.0.0")
 
+	print "RIP CONFIG SUCCESSFUL"
+	print "SLEEPING FOR 10secs FOR ROUTES TO CONVERGE"
+	time.sleep(10)		
+
 
         if png.chkPing(logs,session_list[1],"60.0.0.2") is FAIL:
                 print "\nERROR : PING RETURNED FAILURE"
@@ -105,10 +120,6 @@ def privExecModeWr(logs,session_list):
 
         if png.chkPing(logs,session_list[5],"40.0.0.2") is FAIL:
                 print "\nERROR : PING RETURNED FAILURE"
-
-	print "RIP CONFIG SUCCESSFUL"
-	print "SLEEPING FOR 10secs FOR ROUTES TO CONVERGE"
-	time.sleep(10)		
 
         return SUCCESS
 

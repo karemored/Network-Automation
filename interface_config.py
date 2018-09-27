@@ -89,6 +89,14 @@ def extGlobalMode(logs,process):
 	
         return SUCCESS
 
+def valIntStatus(logs,process,slot,port):
+	intf_details = cmn.valIntStatusWr(logs,process,slot,port)
+ 	print "SCRIPT : INTERFACE:FastEthernet"+str(slot)+"/"+str(port)
+	print "         IP CONFIGURED:"+intf_details[0]
+	print "         STATUS:"+intf_details[1]
+	print "         PROTOCOL:"+intf_details[2]
+	return
+
 ###################################################################
 # NAME         : intfConfigs
 # DESCRIPTION  : Entry point to the Global Conf mode
