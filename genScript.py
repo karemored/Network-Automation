@@ -4,6 +4,7 @@ import showConfigs as shwc
 import interface_config as intconf
 import connectivity as png
 import ripconfig as rip
+import ospfconfig as ospf
 
 SUCCESS = 1
 FAIL = 0
@@ -89,23 +90,36 @@ def privExecModeWr(logs,session_list):
 	if png.chkPing(logs,session_list[4],"50.0.0.2") is FAIL:
                 print "\nERROR : PING RETURNED FAILURE"
 
+	#_____RIP CONFIGUATION_________
 	# enable RIPv2 on ROUTER with its sessio id"
-	rip.enableRIP(logs,session_list[1],"20.0.0.0")
-	rip.enableRIP(logs,session_list[1],"40.0.0.0")
-	rip.enableRIP(logs,session_list[2],"20.0.0.0")
-	rip.enableRIP(logs,session_list[2],"30.0.0.0")
-	rip.enableRIP(logs,session_list[3],"30.0.0.0")
-	rip.enableRIP(logs,session_list[3],"60.0.0.0")
-	rip.enableRIP(logs,session_list[4],"40.0.0.0")
-	rip.enableRIP(logs,session_list[4],"50.0.0.0")
-	rip.enableRIP(logs,session_list[5],"50.0.0.0")
-	rip.enableRIP(logs,session_list[5],"60.0.0.0")
+	#rip.enableRIP(logs,session_list[1],"20.0.0.0")
+	#rip.enableRIP(logs,session_list[1],"40.0.0.0")
+	#rip.enableRIP(logs,session_list[2],"20.0.0.0")
+	#rip.enableRIP(logs,session_list[2],"30.0.0.0")
+	#rip.enableRIP(logs,session_list[3],"30.0.0.0")
+	#rip.enableRIP(logs,session_list[3],"60.0.0.0")
+	#rip.enableRIP(logs,session_list[4],"40.0.0.0")
+	#rip.enableRIP(logs,session_list[4],"50.0.0.0")
+	#rip.enableRIP(logs,session_list[5],"50.0.0.0")
+	#rip.enableRIP(logs,session_list[5],"60.0.0.0")
 	
-	for itr in range(1,len(session_list)):
-		rip.validateRIP(logs,session_list[itr])
+	#for itr in range(1,len(session_list)):
+	#	rip.validateRIP(logs,session_list[itr])
+
+	#_____OSPF CONFIGURATION_______
+	ospf.enableOSPF(logs,session_list[1],"20.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[1],"40.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[2],"20.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[2],"30.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[3],"30.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[3],"60.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[4],"40.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[4],"50.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[5],"50.0.0.0","0.0.0.255")
+	ospf.enableOSPF(logs,session_list[5],"60.0.0.0","0.0.0.255")
 
 	print "SLEEPING FOR 10secs FOR ROUTES TO CONVERGE"
-	time.sleep(10)		
+	time.sleep(60)		
 
 
         if png.chkPing(logs,session_list[1],"60.0.0.2") is FAIL:
