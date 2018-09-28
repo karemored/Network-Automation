@@ -61,8 +61,11 @@ def printOP(logs,process):
 
 def valIntStatusWr(logs,process,slot,port):
 	buffertrack = ""
+	params = ""
 	
-	to_search = "FastEthernet"+str(slot)+"/"+str(port)+"\s+(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})\s+YES\s+\w+\s+(\w+)\s+(\w+)\s+"
+	to_search = "FastEthernet"+str(slot)+"/"+str(port)+"\s+"
+	to_search = to_search + "(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}|unassigned)"
+	to_search = to_search + "\s+YES\s+\w+\s+(up|down|administratively down)\s+(\w+)\s+"
 	process.stdin.write("show ip interface brief")
 	process.stdin.write("\n")
 	
@@ -71,9 +74,29 @@ def valIntStatusWr(logs,process,slot,port):
 		buffertrack = buffertrack + str(opparser)
 		
 		if re.search(to_search,buffertrack):
-			
+			params = buffertrack
+
+		if re.search('R\w#',buffertrack):
 			break
 	
-	search_1 = re.findall(to_search,buffertrack)
+	search_1 = re.findall(to_search,params)
 	
 	return search_1[0]
+
+def validateRIPWr(logs,process):
+	buffertrack = ""
+	SET = 0
+	
+	process.stdin.write("show ip protocols")
+	process.stdin.write("\n")
+
+	while True:
+		opparser = process.stdout.read(1)
+		buffertrack = buffertrack + str(opparser)
+		
+		if re.search('Routing Protocol is \"rip\"',buffertrack):
+			SET = 1
+		if re.search('R\w#',buffertrack):
+			break
+
+	return SET		

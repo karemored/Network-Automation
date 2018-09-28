@@ -69,4 +69,10 @@ def enableRIP(logs,process,ip):
 	if extGlobalMode(logs,process) is FAIL:
                 print "ERROR : FUNCTION \'extGlobalMode\' returned Failure"
 
+def validateRIP(logs,process):	
+	if cmn.validateRIPWr(logs,process) == 0:
+		print "RIP CONFIG FAIL"
+	else:
+		print "RIP CONFIG SUCCESSFUL"
 
+		
