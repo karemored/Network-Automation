@@ -1,0 +1,101 @@
+NETWORK AUTOMATION USING PYTHON
+===============================
+
+DESCRIPTION
+===========
+Network Automation framework provides a easy way to automate 
+Routing protocol on GNS3 and a virtual machine connected to the network.
+Virtual Routers are connected to a virtual switch which connects to 
+the virtual machine on which the automation script executes.
+
+HOW TO USE
+==========
+All desired functionalities are added in the 'genScript.py' file
+The following formats are needed for appropriate configurations
+
+EXECUTE
+=======
+1. command to execute : "python estblshTelnet.py"
+2. The IP address of the router that has to accessed must be added on the list
+   inside the fetchIP() function
+
+	FORMATS
+	=======
+	Interface configurations
+	========================
+	-->intconf.intfConfigs(<logs>,<session_id>,<slot>,<port>,<ip_address>,<subnet_mask>)
+	Description:
+	-----------
+	Configures a particular interface with an IP address and subnet mask
+	Parameters
+	----------
+	logs - pointer to the log file
+	session_id - Telnet session through which a router can be accessed
+	slot - slot on the router
+	port - port that has to be configured
+	ip_address - ip_address to be configured
+	subnet_mask - subnet mask on the interface
+
+	Validating the Interface configuration
+	======================================
+	-->intconf.valIntStatus(<logs>,<session_id>,<slot>,<port>)
+	Description:
+	-----------
+	Validates the IP address on the interface and checks if the status and protocol
+	is up or down
+	parameters:
+	----------
+        logs - pointer to the log file
+        session_id - Telnet session through which a router can be accessed
+        slot - slot on the router
+        port - port that has to be configured
+	 
+	Executing "show ip interface brief" command
+	===========================================
+	-->shwc.showIpIntConfigs(<logs>,<session_id>)
+	Description:
+	-----------
+	Executes "show ip interface brief" command
+	parameters
+	----------
+        logs - pointer to the log file
+        session_id - Telnet session through which a router can be accessed
+	
+	Validates the ping command output to be success or failure
+	==========================================================
+	-->png.chkPing(<logs>,<session_id>,<ip_address>)
+	Description:
+	-----------
+	Execution of the ping command
+	Parameters:
+	----------
+        logs - pointer to the log file
+        session_id - Telnet session through which a router can be accessed
+	ip_address - ip address which has to be pinged
+
+	RIPv2 configuration
+	===================
+	-->rip.enableRIP(<logs>,<session_id>,<ip_address>)
+	Description
+	-----------
+	Enable RIP version-2 on Routers
+	Parameters
+	----------
+        logs - pointer to the log file
+        session_id - Telnet session through which a router can be accessed
+        ip_address - The ip address to be provided with the network command
+
+	OSPF configuration
+	==================
+	-->ospf.enableOSPF(<logs>,<session_id>,<ip_address>,<wild_card_mask>)
+	Description
+	-----------
+	Enable OSPF on Routers
+	Parameters
+	----------
+        logs - pointer to the log file
+        session_id - Telnet session through which a router can be accessed
+        ip_address - The ip address to be provided with the network command
+	wild_card_mask - wild card mask with the network command
+
+
