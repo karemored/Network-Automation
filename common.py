@@ -6,11 +6,30 @@ import glbvar as glb
 SUCCESS = 1
 FAIL = 0
 
+###################################################################
+# NAME         : execComnd
+# DESCRIPTION  : Execute Command on router through the stdin PIPE 
+#                of the popen object
+# INPUT PARAMS : cmd - command to be executed
+#                logs - pointer to the log file
+#                process - popen object 
+# RETURN       : SUCCESS/FAIL
+###################################################################
+
 def execComnd(cmd,logs,process):
         process.stdin.write(cmd)
         process.stdin.write("\n")
         
 	return printOP(logs,process)
+
+###################################################################
+# NAME         : execComnd
+# DESCRIPTION  : Prints the output of the command executed by
+#		 execComnd function
+# INPUT PARAMS : logs - pointer to the log file
+#                process - popen object
+# RETURN       : SUCCESS/FAIL
+###################################################################
 
 def printOP(logs,process):
 	global PING_STAT
@@ -58,6 +77,15 @@ def printOP(logs,process):
 
         return SUCCESS
 
+###################################################################
+# NAME         : valIntStatusWr
+# DESCRIPTION  : validates the status of interface
+# INPUT PARAMS : slot - slot on the router
+#		 port - port on the router
+#                logs - pointer to the log file
+#                process - popen object
+# RETURN       : SUCCESS/FAIL
+###################################################################
 
 def valIntStatusWr(logs,process,slot,port):
 	buffertrack = ""
@@ -82,6 +110,14 @@ def valIntStatusWr(logs,process,slot,port):
 	search_1 = re.findall(to_search,params)
 	
 	return search_1[0]
+
+###################################################################
+# NAME         : validateRIPWr
+# DESCRIPTION  : validates whether RIP is configured or not
+# INPUT PARAMS : logs - pointer to the log file
+#                process - popen object
+# RETURN       : SUCCESS/FAIL
+###################################################################
 
 def validateRIPWr(logs,process):
 	buffertrack = ""
