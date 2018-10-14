@@ -5,6 +5,7 @@ import interface_config as intconf
 import connectivity as png
 import ripconfig as rip
 import ospfconfig as ospf
+import eigrpconf as eigrp
 
 SUCCESS = 1
 FAIL = 0
@@ -117,6 +118,18 @@ def privExecModeWr(logs,session_list):
 	ospf.enableOSPF(logs,session_list[4],"50.0.0.0","0.0.0.255")
 	ospf.enableOSPF(logs,session_list[5],"50.0.0.0","0.0.0.255")
 	ospf.enableOSPF(logs,session_list[5],"60.0.0.0","0.0.0.255")
+
+	#_____EIGRP CONFIGURATION_______
+	eigrp.enableEIGRP(logs,session_list[1],100,"20.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[1],100,"40.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[2],100,"20.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[2],100,"30.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[3],100,"30.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[3],100,"60.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[4],100,"40.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[4],100,"50.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[5],100,"50.0.0.0","0.0.0.255")
+	eigrp.enableEIGRP(logs,session_list[5],100,"60.0.0.0","0.0.0.255")
 
 	print "SLEEPING FOR 10secs FOR ROUTES TO CONVERGE"
 	time.sleep(60)		
