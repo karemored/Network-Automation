@@ -108,16 +108,16 @@ def privExecModeWr(logs,session_list):
 	#	rip.validateRIP(logs,session_list[itr])
 
 	#_____OSPF CONFIGURATION_______
-	ospf.enableOSPF(logs,session_list[1],"20.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[1],"40.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[2],"20.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[2],"30.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[3],"30.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[3],"60.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[4],"40.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[4],"50.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[5],"50.0.0.0","0.0.0.255")
-	ospf.enableOSPF(logs,session_list[5],"60.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[1],"20.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[1],"40.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[2],"20.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[2],"30.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[3],"30.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[3],"60.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[4],"40.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[4],"50.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[5],"50.0.0.0","0.0.0.255")
+	#ospf.enableOSPF(logs,session_list[5],"60.0.0.0","0.0.0.255")
 
 	#_____EIGRP CONFIGURATION_______
 	eigrp.enableEIGRP(logs,session_list[1],100,"20.0.0.0","0.0.0.255")

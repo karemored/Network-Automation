@@ -98,4 +98,17 @@ EXECUTE
         ip_address - The ip address to be provided with the network command
 	wild_card_mask - wild card mask with the network command
 
+        EIGRP configuration
+        ==================
+        -->eigrp.enableEIGRP(<logs>,<session_id>,<AS_number>,<ip_address>,<wild_card_mask>)
+        Description
+        -----------
+        Enable OSPF on Routers
+        Parameters
+        ----------
+        logs - pointer to the log file
+        session_id - Telnet session through which a router can be accessed
+        AS_number - AS number
+        ip_address - The ip address to be provided with the network command
+        wild_card_mask - wild card mask with the network command
 
